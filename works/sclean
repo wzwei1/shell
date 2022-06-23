@@ -1,0 +1,11 @@
+if [ $# -eq 0 ];then 
+    str="请添加参数"
+    echo -e "\033[33m ${str} \033[0m"      #黄色
+    exit
+fi
+for file in $@
+do
+    echo $file
+    sed -i 's/\r//g' ${file}
+
+done

@@ -1,0 +1,5 @@
+echo ${SOURCE_TXT}
+sed  -i '/SOURCE_TXT=/d' $(cat ${SOURCE_TXT} |grep "shell/work_shell" | awk '{print $2}' |tail -1)
+sed  -i '/shell\/work_shell/d' ${SOURCE_TXT}
+str="已删除"
+echo -e "\033[41;37m ${str} \033[0m"  #red

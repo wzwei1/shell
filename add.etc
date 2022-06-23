@@ -1,0 +1,17 @@
+if [ $# -eq 1 ];then
+    source_txt=$1
+else
+    source_txt=~/.bashrc
+fi
+num=$(cat ${source_txt} |grep "shell/work_shell" | wc -l)
+if [ ${num} -eq 0 ];then
+    #echo >> ${source_txt}
+    echo source $(pwd)/work_shell >> ${source_txt}
+    echo export SOURCE_TXT=${source_txt}  >> $(pwd)/work_shell
+    echo ${source_txt}
+    str="已添加"
+    echo -e "\033[32m ${str} \033[0m"       #绿色
+else
+    str="重复添加"
+    echo -e "\033[33m ${str} \033[0m"      #黄色
+fi
