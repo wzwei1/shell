@@ -1,3 +1,11 @@
+#!/bin/bash
+if [ $# -eq 1 ] && [[ $1 == --help ]] ;then 
+    str="需要添加一个及以上参数"
+    echo -e "\033[32m ${str} \033[0m"  #绿色字
+    str="可以清掉shell文件在windows编写移动过来后无法使用的问题"
+    echo -e "\033[32m ${str} \033[0m"  #绿色字
+    exit
+fi
 if [ $# -eq 0 ];then 
     str="请添加参数"
     echo -e "\033[33m ${str} \033[0m"      #黄色

@@ -1,3 +1,13 @@
+#!/bin/bash
+if [ $# -eq 1 ] && [[ $1 == --help ]] ;then 
+    str="仅有一个参数，执行时需要使用source或 ."
+    echo -e "\033[32m ${str} \033[0m"  #绿色字
+    str="不接参数表示在~/.bashr中添加配置"
+    echo -e "\033[32m ${str} \033[0m"  #绿色字
+    str="接参数需要是一个文件名，在指定文件中添加配置"
+    echo -e "\033[32m ${str} \033[0m"  #绿色字
+    exit
+fi
 if [ $# -eq 1 ];then
     source_txt=$1
 else
@@ -15,3 +25,6 @@ else
     str="重复添加"
     echo -e "\033[33m ${str} \033[0m"      #黄色
 fi
+source ${source_txt}
+chmod 744 $(pwd)/works/*
+chmod 744 $(pwd)/*.etc

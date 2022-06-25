@@ -1,0 +1,16 @@
+#Add my own tab automatic completion
+function _bigtool() {
+    COMPREPLY=()
+    local cur=${COMP_WORDS[COMP_CWORD]};
+    local com=${COMP_WORDS[COMP_CWORD-1]};
+    case $com in
+    'sclean')
+        COMPREPLY=($(compgen -W '$(ls .)' -- $cur))  #''符号里的内容是需要搜索的所有内容，$cur是命令后接输入的值
+        ;;
+    *)
+	COMPREPLY=($(compgen -W '$(ls .)' -- $cur))
+        ;;
+    esac
+    return 0
+}
+complete -F _bigtool sclean     #-F后的值是函数名字和命令名字

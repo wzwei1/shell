@@ -1,3 +1,16 @@
+#!/bin/bash
+if [ $# -eq 1 ] && [[ $1 == --help ]] ;then 
+    str="删除配置,不需要参数"
+    echo -e "\033[32m ${str} \033[0m"  #绿色字
+    str="如果显示 sed: no input files 字样，仅表示已经删除work_shell里的变量，可以不用管"
+    echo -e "\033[32m ${str} \033[0m"  #绿色字
+    exit
+fi
+if [[ ${SOURCE_TXT} == "" ]] ;then
+    str="还没配置，请先配置"
+    echo -e "\033[31m ${str} \033[0m"  #红色字
+    exit
+fi
 echo ${SOURCE_TXT}
 sed  -i '/SOURCE_TXT=/d' $(cat ${SOURCE_TXT} |grep "shell/work_shell" | awk '{print $2}' |tail -1)
 sed  -i '/shell\/work_shell/d' ${SOURCE_TXT}
