@@ -16,6 +16,7 @@ fi
 num=$(cat ${source_txt} |grep "shell/work_shell" | wc -l)
 if [ ${num} -eq 0 ];then
     #echo >> ${source_txt}
+    echo export PWD_SHELL=$(pwd) >> ${source_txt}
     echo source $(pwd)/work_shell >> ${source_txt}
     echo export SOURCE_TXT=${source_txt}  >> $(pwd)/work_shell
     echo ${source_txt}

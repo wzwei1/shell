@@ -1,2 +1,2 @@
-export PATH="$PATH:$(pwd)/works"
-source $(pwd)/tab_comp/*
+export PATH="$PATH:${PWD_SHELL}/works"
+source ${PWD_SHELL}/tab_comp/*
