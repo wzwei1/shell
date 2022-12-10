@@ -1,0 +1,40 @@
+#!/bin/bash
+if [ $# -eq 1 ] && [[ $1 == --help ]] ;then
+    str="编译环境，在顶层目录的compile目录下设置，"
+    echo -e "\033[32m ${str} \033[0m"  #绿色字
+    str="  由文件作为环境变量名，内容作为环境变量的值"
+    echo -e "\033[32m ${str} \033[0m"  #绿色字
+    str="环境变量配置在compile_config目录下，根据自己需要删除和修改"
+    echo -e "\033[32m ${str} \033[0m"  #绿色字
+    str="无参数时，生成默认配置文件config"
+    echo -e "\033[32m ${str} \033[0m"  #绿色字
+    str="一个参数，作为生成环境的文件名字"
+    echo -e "\033[32m ${str} \033[0m"  #绿色字
+    str="  文件存在，则替换目前使用的环境config"
+    echo -e "\033[33m ${str} \033[0m"  #黄色字
+    str="  文件不存在，则根据compilte目录下的变量生成该文件，并替换目前使用的环境config"
+    echo -e "\033[33m ${str} \033[0m"  #黄色字
+    str="注意：不要在里面添加任何目录，只能添加普通文件"
+    echo -e "\033[31m ${str} \033[0m"  #红色字
+    exit
+fi
+if [ $# -eq 0 ];then
+    rm -f $PWD_SHELL/compile_config/config
+    for filename in $(ls $PWD_SHELL/compile) ;do echo export $filename=$(cat $PWD_SHELL/compile/${filename}) >> $PWD_SHELL/compile_config/config ;done
+    str="已添加到config文件下"
+    echo -e "\033[33m ${str} \033[0m"      #黄色
+    exit
+fi
+if [ $# -eq 1 ];then
+    if [ $(compgen -W '$(ls $PWD_SHELL/compile_config/)' -- $1 | wc -c ) = $(echo $1 | wc -c ) ];then
+        cp $PWD_SHELL/compile_config/$1 $PWD_SHELL/compile_config/config
+        str="已替换config文件"
+        echo -e "\033[33m ${str} \033[0m"      #黄色
+    else
+        rm -f $PWD_SHELL/compile_config/config
+        for filename in $(ls $PWD_SHELL/compile) ;do echo export $filename=$(cat $PWD_SHELL/compile/${filename}) >> $PWD_SHELL/compile_config/config ;done
+        cp  $PWD_SHELL/compile_config/config $PWD_SHELL/compile_config/$1
+        str="已添加到config文件下,并添加到$1文件中"
+        echo -e "\033[33m ${str} \033[0m"      #黄色
+    fi
+fi
