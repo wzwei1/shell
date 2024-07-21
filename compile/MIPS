@@ -1,0 +1,1 @@
+"ARCH=mips CROSS_COMPILE=${GNUS}/opt/gcc-4.9.3-64-gnu64/bin/mips64el-linux-"
